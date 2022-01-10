@@ -1,7 +1,7 @@
 import { Box, Flex, SimpleGrid, Text, theme } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
-import { Header } from "../components/Header/Header";
-import { Sidebar } from "../components/Sidebar/Sidebar";
+import { Header } from "../components/Header";
+import { Sidebar } from "../components/Sidebar";
 
 // Removendo SSR da lib que necessita do window (client)
 const ReactApexCharts = dynamic(
