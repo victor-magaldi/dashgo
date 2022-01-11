@@ -27,10 +27,10 @@ export default function CreateUser() {
 
                     <Divider my="6" borderColor="gray.700" />
 
-                    <VStack spacing="8">
+                    <VStack spacing={["6", "8"]}>
                         <SimpleGrid
                             minChildWidth="240px"
-                            spacing="8"
+                            spacing={["6", "8"]}
                             width="100%"
                         >
                             <Input name="name" label="Nome Completo" />
@@ -39,7 +39,7 @@ export default function CreateUser() {
 
                         <SimpleGrid
                             minChildWidth="240px"
-                            spacing="8"
+                            spacing={["6", "8"]}
                             width="100%"
                         >
                             <Input
@@ -56,7 +56,7 @@ export default function CreateUser() {
                     </VStack>
 
                     <Flex mt="8" justify="flex-end">
-                        <HStack spacing="4">
+                        <HStack spacing={["6", "8"]}>
                             <Button colorScheme="whiteAlpha">Cancelar</Button>
                             <Button colorScheme="pink">Salvar</Button>
                         </HStack>
