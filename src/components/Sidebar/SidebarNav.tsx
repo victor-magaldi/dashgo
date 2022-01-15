@@ -1,0 +1,33 @@
+import { LinkProps as ChakraLinkProps, Stack } from "@chakra-ui/react";
+import React, { ElementType } from "react";
+import { NavSection } from "./NavSection";
+import { NavLink } from "./NavLink";
+import {
+    RiContactsLine,
+    RiDashboardLine,
+    RiGitMergeLine,
+    RiInputMethodLine,
+} from "react-icons/ri";
+
+export function SidebarNav() {
+    return (
+        <Stack spacing="12" align="flex-start">
+            <NavSection title="Geral">
+                <NavLink href={"/dashboard"} icon={RiDashboardLine}>
+                    Dashboard
+                </NavLink>
+                <NavLink href={"/users"} icon={RiContactsLine}>
+                    Usuários
+                </NavLink>
+            </NavSection>
+            <NavSection title="Automação">
+                <NavLink href={"/forms"} icon={RiInputMethodLine}>
+                    Formulários
+                </NavLink>
+                <NavLink href={"/automation"} icon={RiGitMergeLine}>
+                    Automação
+                </NavLink>
+            </NavSection>
+        </Stack>
+    );
+}
