@@ -3,9 +3,9 @@
 Dashboard desenvolvida usando o chakraUi e possui recursos graficos como "react-apexcharts"
 \
 \
-![gif 1](https://raw.githubusercontent.com/victor-magaldi/dashgo/main/src/assets/gif-1.gif)
+![gif 1](https://raw.githubusercontent.com/victor-magaldi/dashgo/blob/main/assets/gif-1.gif)
 \
-![gif 2](https://raw.githubusercontent.com/victor-magaldi/dashgo/main/src/assets/gif-2.gif)
+![gif 2](https://raw.githubusercontent.com/victor-magaldi/dashgo/blob/main/assets/gif-2.gif)
 
 ## Tecnologias 🔥
 
