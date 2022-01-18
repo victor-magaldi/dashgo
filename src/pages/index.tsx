@@ -1,11 +1,19 @@
 import { Flex, Button, Stack } from "@chakra-ui/react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { Input } from "../components/Form/Input";
 
-export default function SignIn() {
-    const { register, handleSubmit } = useForm();
+type SignInFormData = {
+    email: string;
+    password: string;
+};
 
-    function handleSignIn() {}
+export default function SignIn() {
+    const { register, handleSubmit, formState } = useForm();
+
+    const handleSignIn: SubmitHandler<SignInFormData> = async (data, event) => {
+        event.preventDefault();
+        console.log("DATA", data);
+    };
 
     return (
         <Flex
@@ -22,6 +30,7 @@ export default function SignIn() {
                 p="8"
                 borderRadius={8}
                 flexDir={"column"}
+                onSubmit={handleSubmit(handleSignIn)}
             >
                 <Stack spacing="4">
                     <Input
@@ -38,7 +47,13 @@ export default function SignIn() {
                     />
                 </Stack>
 
-                <Button type="submit" mt="6" colorScheme="pink" size="lg">
+                <Button
+                    type="submit"
+                    mt="6"
+                    colorScheme="pink"
+                    size="lg"
+                    isLoading={formState?.isSubmitting}
+                >
                     Entrar
                 </Button>
             </Flex>
