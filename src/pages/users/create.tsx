@@ -14,6 +14,7 @@ import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type CreateUserFormData = {
     name: string;
@@ -45,6 +46,18 @@ const createUserFormSchema = yup
     .required();
 
 export default function CreateUser() {
+    const { register, handleSubmit, formState } = useForm({
+        resolver: yupResolver(createUserFormSchema),
+    });
+    const { errors } = formState;
+
+    const handleCreateUser: SubmitHandler<CreateUserFormData> = (
+        values,
+        evt
+    ) => {
+        evt.preventDefault();
+        console.log("values ", values);
+    };
     return (
         <Box>
             <Header />
@@ -52,7 +65,14 @@ export default function CreateUser() {
             <Flex w="100%" my="6" maxWidth={1480} mx="auto" px="6">
                 <Sidebar />
 
-                <Box flex="1" borderRadius="8" bgColor="gray.800" p="8">
+                <Box
+                    as="form"
+                    flex="1"
+                    borderRadius="8"
+                    bgColor="gray.800"
+                    p="8"
+                    onSubmit={handleSubmit(handleCreateUser)}
+                >
                     <Heading size="lg" fontWeight="normal">
                         Criar usuário
                     </Heading>
@@ -65,8 +85,18 @@ export default function CreateUser() {
                             spacing={["6", "8"]}
                             width="100%"
                         >
-                            <Input name="name" label="Nome Completo" />
-                            <Input name="email" label="E-mail" />
+                            <Input
+                                name="name"
+                                label="Nome Completo"
+                                error={errors?.name}
+                                {...register("name")}
+                            />
+                            <Input
+                                name="email"
+                                label="E-mail"
+                                error={errors?.email}
+                                {...register("email")}
+                            />
                         </SimpleGrid>
 
                         <SimpleGrid
@@ -78,11 +108,15 @@ export default function CreateUser() {
                                 name="password"
                                 type="password"
                                 label="Senha"
+                                error={errors?.password}
+                                {...register("password")}
                             />
                             <Input
                                 name="password_confirmation"
                                 type="password"
                                 label="Confirme sua senha"
+                                error={errors?.password_confirmation}
+                                {...register("password_confirmation")}
                             />
                         </SimpleGrid>
                     </VStack>
@@ -95,7 +129,13 @@ export default function CreateUser() {
                                 </Button>
                             </Link>
 
-                            <Button colorScheme="pink">Salvar</Button>
+                            <Button
+                                colorScheme="pink"
+                                type="submit"
+                                isLoading={formState?.isSubmitting}
+                            >
+                                Salvar
+                            </Button>
                         </HStack>
                     </Flex>
                 </Box>
