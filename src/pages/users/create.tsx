@@ -12,6 +12,37 @@ import Link from "next/link";
 import { Input } from "../../components/Form/Input";
 import { Header } from "../../components/Header";
 import { Sidebar } from "../../components/Sidebar";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+type CreateUserFormData = {
+    name: string;
+    email: string;
+    password: string;
+    password_confirmation: string;
+};
+const createUserFormSchema = yup
+    .object()
+    .shape({
+        name: yup.string().required("nome obrigatória"),
+
+        email: yup
+            .string()
+            .required("e-mail obrigatório")
+            .email("email inválido"),
+        password: yup
+            .string()
+            .required("senha obrigatória")
+            .min(6, "a senha precisa de 6 caracteres no mínimo"),
+        password_confirmation: yup
+            .string()
+            .required("senha obrigatória")
+            .oneOf(
+                [null, yup.ref("password")],
+                "as Senhas precisam ser iguais"
+            ),
+    })
+    .required();
 
 export default function CreateUser() {
     return (
