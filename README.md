@@ -24,7 +24,7 @@ Foram usados novos recursos do React como:
 
 **Server:**
 
--   Não possui
+-   Não possui mas foi utilizado o mirageJs para "mockar" de dados.
 
 ## Rodando o Projeto 💻
 
