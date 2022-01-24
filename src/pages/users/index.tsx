@@ -17,18 +17,21 @@ import {
 import Link from "next/link";
 import { useEffect } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
+import { useQuery } from "react-query";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList() {
+    const query = useQuery("users", async () => {
+        const response = await fetch("http://localhost:3000/api/users");
+        const data = await response.json();
+
+        return data;
+    });
+    console.log("react-query ", query);
     const isWideVersion = useBreakpointValue({ base: false, lg: true });
 
-    useEffect(() => {
-        fetch("http://localhost:3000/api/users")
-            .then((r) => r.json())
-            .then((jsonData) => console.log("JSON", jsonData));
-    }, []);
     return (
         <Box>
             <Header />
