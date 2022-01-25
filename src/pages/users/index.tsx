@@ -5,6 +5,7 @@ import {
     Flex,
     Heading,
     Icon,
+    Spinner,
     Table,
     Tbody,
     Td,
@@ -23,13 +24,13 @@ import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList() {
-    const query = useQuery("users", async () => {
+    const { data, isLoading, error } = useQuery("users", async () => {
         const response = await fetch("http://localhost:3000/api/users");
         const data = await response.json();
 
         return data;
     });
-    console.log("react-query ", query);
+
     const isWideVersion = useBreakpointValue({ base: false, lg: true });
 
     return (
@@ -58,59 +59,78 @@ export default function UsersList() {
                         </Link>
                     </Flex>
 
-                    <Table colorScheme="whiteAlpha">
-                        <Thead>
-                            <Tr>
-                                <Th
-                                    px={["4", "4", "6"]}
-                                    color="gray.300"
-                                    width="8"
-                                >
-                                    <Checkbox colorScheme="pink" />
-                                </Th>
-                                <Th>Usuário</Th>
-                                {isWideVersion && <Th>Data de Cadastro</Th>}
+                    {isLoading ? (
+                        <Flex justify="center">
+                            <Spinner />
+                        </Flex>
+                    ) : error ? (
+                        <Flex justify="center">
+                            <Text>Falha ao obter dados dos usuários.</Text>
+                        </Flex>
+                    ) : (
+                        <>
+                            <Table colorScheme="whiteAlpha">
+                                <Thead>
+                                    <Tr>
+                                        <Th
+                                            px={["4", "4", "6"]}
+                                            color="gray.300"
+                                            width="8"
+                                        >
+                                            <Checkbox colorScheme="pink" />
+                                        </Th>
+                                        <Th>Usuário</Th>
+                                        {isWideVersion && (
+                                            <Th>Data de Cadastro</Th>
+                                        )}
 
-                                <Th width="8"></Th>
-                            </Tr>
-                        </Thead>
-                        <Tbody>
-                            <Tr>
-                                <Td>
-                                    <Checkbox colorScheme="pink" />
-                                </Td>
-                                <Td>
-                                    <Box>
-                                        <Text fontWeight="bold">
-                                            João Silva
-                                        </Text>
-                                        <Text fontSize="sm" color="gray.300">
-                                            João@gmail.com
-                                        </Text>
-                                    </Box>
-                                </Td>
-                                {isWideVersion && <Td>04 de Janeiro, 2022</Td>}
-                                <Td>
-                                    <Button
-                                        as="a"
-                                        size="sm"
-                                        fontSize="sm"
-                                        colorScheme="purple"
-                                        leftIcon={
-                                            <Icon
-                                                as={RiPencilLine}
-                                                fontSize="16"
-                                            />
-                                        }
-                                        cursor="pointer"
-                                    >
-                                        {isWideVersion && "Editar"}
-                                    </Button>
-                                </Td>
-                            </Tr>
-                        </Tbody>
-                    </Table>
-                    <Pagination />
+                                        <Th width="8"></Th>
+                                    </Tr>
+                                </Thead>
+                                <Tbody>
+                                    <Tr>
+                                        <Td>
+                                            <Checkbox colorScheme="pink" />
+                                        </Td>
+                                        <Td>
+                                            <Box>
+                                                <Text fontWeight="bold">
+                                                    João Silva
+                                                </Text>
+                                                <Text
+                                                    fontSize="sm"
+                                                    color="gray.300"
+                                                >
+                                                    João@gmail.com
+                                                </Text>
+                                            </Box>
+                                        </Td>
+                                        {isWideVersion ? (
+                                            <Td>22 de abril, 2022</Td>
+                                        ) : null}
+                                        <Td>
+                                            <Button
+                                                as="a"
+                                                size="sm"
+                                                fontSize="sm"
+                                                colorScheme="purple"
+                                                leftIcon={
+                                                    <Icon
+                                                        as={RiPencilLine}
+                                                        fontSize="16"
+                                                    />
+                                                }
+                                                cursor="pointer"
+                                            >
+                                                {isWideVersion && "Editar"}
+                                            </Button>
+                                        </Td>
+                                    </Tr>
+                                </Tbody>
+                            </Table>
+                            <Pagination />
+                        </>
+                    )}
                 </Box>
             </Flex>
         </Box>
