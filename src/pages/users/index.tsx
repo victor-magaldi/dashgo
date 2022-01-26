@@ -34,9 +34,14 @@ export default function UsersList() {
                 id: user.id,
                 name: user.name,
                 email: user.email,
-                createdAt: new Date(
-                    Number(user.createdAt)
-                ).toLocaleDateString(),
+                createdAt: new Date(Number(user.createdAt)).toLocaleDateString(
+                    "pt-BR",
+                    {
+                        day: "2-digit",
+                        month: "short",
+                        year: "numeric",
+                    }
+                ),
             };
         });
         return users;
@@ -119,7 +124,7 @@ export default function UsersList() {
                                                     </Box>
                                                 </Td>
                                                 {isWideVersion ? (
-                                                    <Td>{}</Td>
+                                                    <Td>{user.createdAt}</Td>
                                                 ) : null}
                                                 <Td>
                                                     <Button
