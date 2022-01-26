@@ -19,7 +19,7 @@ Foram usados novos recursos do React como:
 -   react-apexcharts (uma lib para gráficos)
 -   react-hook-form para trabalhar com forms
 -   yup para validação de form integrado com react-hook-form
--   axios
+-   axios (cliente HTTP baseado em Promises )
 -   hook useState, useEffect , context API
 
 **Server:**
