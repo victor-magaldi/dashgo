@@ -26,26 +26,32 @@ import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
 
 export default function UsersList() {
-    const { data, isLoading, error } = useQuery("users", async () => {
-        const response = await fetch("http://localhost:3000/api/users");
-        const data = await response.json();
-        const users = data.users.map((user) => {
-            return {
-                id: user.id,
-                name: user.name,
-                email: user.email,
-                createdAt: new Date(Number(user.createdAt)).toLocaleDateString(
-                    "pt-BR",
-                    {
+    const { data, isLoading, error } = useQuery(
+        "users",
+        async () => {
+            const response = await fetch("http://localhost:3000/api/users");
+            const data = await response.json();
+            const users = data.users.map((user) => {
+                return {
+                    id: user.id,
+                    name: user.name,
+                    email: user.email,
+                    createdAt: new Date(
+                        Number(user.createdAt)
+                    ).toLocaleDateString("pt-BR", {
                         day: "2-digit",
                         month: "short",
                         year: "numeric",
-                    }
-                ),
-            };
-        });
-        return users;
-    });
+                    }),
+                };
+            });
+            return users;
+        },
+        {
+            // o tempo que definiremos que o dado não irá mais mudar
+            staleTime: 1000 * 5,
+        }
+    );
 
     const isWideVersion = useBreakpointValue({ base: false, lg: true });
 
