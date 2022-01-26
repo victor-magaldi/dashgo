@@ -16,9 +16,11 @@ import {
     useBreakpointValue,
 } from "@chakra-ui/react";
 import Link from "next/link";
+import { userInfo } from "os";
 import { useEffect } from "react";
 import { RiAddLine, RiPencilLine } from "react-icons/ri";
 import { useQuery } from "react-query";
+import { date } from "yup";
 import { Header } from "../../components/Header";
 import { Pagination } from "../../components/Pagination";
 import { Sidebar } from "../../components/Sidebar";
@@ -88,44 +90,58 @@ export default function UsersList() {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    <Tr>
-                                        <Td>
-                                            <Checkbox colorScheme="pink" />
-                                        </Td>
-                                        <Td>
-                                            <Box>
-                                                <Text fontWeight="bold">
-                                                    João Silva
-                                                </Text>
-                                                <Text
-                                                    fontSize="sm"
-                                                    color="gray.300"
-                                                >
-                                                    João@gmail.com
-                                                </Text>
-                                            </Box>
-                                        </Td>
-                                        {isWideVersion ? (
-                                            <Td>22 de abril, 2022</Td>
-                                        ) : null}
-                                        <Td>
-                                            <Button
-                                                as="a"
-                                                size="sm"
-                                                fontSize="sm"
-                                                colorScheme="purple"
-                                                leftIcon={
-                                                    <Icon
-                                                        as={RiPencilLine}
-                                                        fontSize="16"
-                                                    />
-                                                }
-                                                cursor="pointer"
-                                            >
-                                                {isWideVersion && "Editar"}
-                                            </Button>
-                                        </Td>
-                                    </Tr>
+                                    {console.log(data, "data")}
+                                    {data.users.map((user) => {
+                                        return (
+                                            <Tr key={user?.id}>
+                                                <Td>
+                                                    <Checkbox colorScheme="pink" />
+                                                </Td>
+                                                <Td>
+                                                    <Box>
+                                                        <Text fontWeight="bold">
+                                                            {user?.name}
+                                                        </Text>
+                                                        <Text
+                                                            fontSize="sm"
+                                                            color="gray.300"
+                                                        >
+                                                            {user?.email}
+                                                        </Text>
+                                                    </Box>
+                                                </Td>
+                                                {isWideVersion ? (
+                                                    <Td>
+                                                        {new Date(
+                                                            Number(
+                                                                user.createdAt
+                                                            )
+                                                        ).toISOString()}
+                                                    </Td>
+                                                ) : null}
+                                                <Td>
+                                                    <Button
+                                                        as="a"
+                                                        size="sm"
+                                                        fontSize="sm"
+                                                        colorScheme="purple"
+                                                        leftIcon={
+                                                            <Icon
+                                                                as={
+                                                                    RiPencilLine
+                                                                }
+                                                                fontSize="16"
+                                                            />
+                                                        }
+                                                        cursor="pointer"
+                                                    >
+                                                        {isWideVersion &&
+                                                            "Editar"}
+                                                    </Button>
+                                                </Td>
+                                            </Tr>
+                                        );
+                                    })}
                                 </Tbody>
                             </Table>
                             <Pagination />
