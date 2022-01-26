@@ -29,8 +29,17 @@ export default function UsersList() {
     const { data, isLoading, error } = useQuery("users", async () => {
         const response = await fetch("http://localhost:3000/api/users");
         const data = await response.json();
-
-        return data;
+        const users = data.users.map((user) => {
+            return {
+                id: user.id,
+                name: user.name,
+                email: user.email,
+                createdAt: new Date(
+                    Number(user.createdAt)
+                ).toLocaleDateString(),
+            };
+        });
+        return users;
     });
 
     const isWideVersion = useBreakpointValue({ base: false, lg: true });
@@ -90,8 +99,7 @@ export default function UsersList() {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {console.log(data, "data")}
-                                    {data.users.map((user) => {
+                                    {data.map((user) => {
                                         return (
                                             <Tr key={user?.id}>
                                                 <Td>
@@ -111,13 +119,7 @@ export default function UsersList() {
                                                     </Box>
                                                 </Td>
                                                 {isWideVersion ? (
-                                                    <Td>
-                                                        {new Date(
-                                                            Number(
-                                                                user.createdAt
-                                                            )
-                                                        ).toISOString()}
-                                                    </Td>
+                                                    <Td>{}</Td>
                                                 ) : null}
                                                 <Td>
                                                     <Button
