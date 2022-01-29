@@ -21,6 +21,7 @@ Foram usados novos recursos do React como:
 -   yup para validação de form integrado com react-hook-form
 -   axios (cliente HTTP baseado em Promises )
 -   hook useState, useEffect , context API
+-   React Query que vai facilitar a busca, o armazenamento em cache e a sincronização com o servidor,
 
 **Server:**
 
