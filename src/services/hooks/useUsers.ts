@@ -10,8 +10,8 @@ type Users = {
 
 export const getUsers = async () => {
     const { data } = await api.get("users");
-
-    const users: Promise<Users[]> = data.users.map((user) => {
+    console.log("vvictor ", data)
+    const users: Promise<Users[]> = data.user.map((user) => {
         return {
             id: user.id,
             name: user.name,
