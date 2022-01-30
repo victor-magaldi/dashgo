@@ -13,13 +13,12 @@ Dashboard desenvolvida usando o chakraUi e possui recursos graficos como "react-
 \
 Foram usados novos recursos do React como:
 
--   React
--   Typescript
--   chakra-ui (uma lib de componente de interface)
--   react-apexcharts (uma lib para gráficos)
+-   React + Typescript
+-   chakra-ui - uma lib de componentes para acelerar desenvolvimento em React
+-   react-apexcharts - uma lib para gráficos
 -   react-hook-form para trabalhar com forms
 -   yup para validação de form integrado com react-hook-form
--   axios (cliente HTTP baseado em Promises )
+-   axios - cliente HTTP baseado em Promises
 -   hook useState, useEffect , context API
 -   React Query que vai facilitar a busca, o armazenamento em cache e a sincronização com o servidor,
 
