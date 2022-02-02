@@ -39,9 +39,7 @@ export function makeServer() {
 
                 const pageStart = (Number(page) - 1) * Number(per_page)
                 const pageEnd = pageStart + Number(per_page)
-                console.log("pageStart", pageStart, pageEnd)
                 const user = this.serialize(schema.all("user")).users.slice(pageStart, pageEnd)
-                console.log("totaasasl", user, total)
 
                 return new Response(200, { "x-total-count": String(total) }, { user })
             });

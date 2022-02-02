@@ -37,7 +37,6 @@ export function Pagination({
               )
             : [];
 
-    console.log(nextPages, previousPage);
     return (
         <Stack
             direction={["column", "row"]}
@@ -52,8 +51,6 @@ export function Pagination({
             <Stack direction="row" spacing="2">
                 {previousPage.length > 0 &&
                     previousPage.map((page) => {
-                        console.log("teste", page);
-
                         return <PaginationItem key={page} number={page} />;
                     })}
 
@@ -61,7 +58,6 @@ export function Pagination({
 
                 {nextPages.length > 0 &&
                     nextPages.map((page) => {
-                        console.log("teste", page);
                         return <PaginationItem key={page} number={page} />;
                     })}
             </Stack>
