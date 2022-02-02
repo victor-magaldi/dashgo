@@ -54,7 +54,10 @@ export function Pagination({
             <Stack direction="row" spacing="2">
                 {currentPage > 1 + SIBLINGCOUNTS && (
                     <>
-                        <PaginationItem number={1} />
+                        <PaginationItem
+                            number={1}
+                            onPageChange={onPageChange}
+                        />
                         {currentPage > 2 + SIBLINGCOUNTS && (
                             <Text
                                 color={"gray.300"}
@@ -69,14 +72,30 @@ export function Pagination({
 
                 {previousPage.length > 0 &&
                     previousPage.map((page) => {
-                        return <PaginationItem key={page} number={page} />;
+                        return (
+                            <PaginationItem
+                                onPageChange={onPageChange}
+                                key={page}
+                                number={page}
+                            />
+                        );
                     })}
 
-                <PaginationItem isCurrent number={currentPage} />
+                <PaginationItem
+                    onPageChange={onPageChange}
+                    isCurrent
+                    number={currentPage}
+                />
 
                 {nextPages.length > 0 &&
                     nextPages.map((page) => {
-                        return <PaginationItem key={page} number={page} />;
+                        return (
+                            <PaginationItem
+                                onPageChange={onPageChange}
+                                key={page}
+                                number={page}
+                            />
+                        );
                     })}
 
                 {currentPage + SIBLINGCOUNTS < lastPage && (
@@ -90,7 +109,10 @@ export function Pagination({
                                 ...
                             </Text>
                         )}
-                        <PaginationItem number={lastPage} />
+                        <PaginationItem
+                            onPageChange={onPageChange}
+                            number={lastPage}
+                        />
                     </>
                 )}
             </Stack>
