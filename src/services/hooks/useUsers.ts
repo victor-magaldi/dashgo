@@ -7,11 +7,16 @@ type Users = {
     email: string
     createdAt: string
 }
+export const getUsers = async (page: number) => {
+    const { data, headers } = await api.get("users", {
+        params: {
+            page
+        }
+    });
 
-export const getUsers = async () => {
-    const { data } = await api.get("users");
-    console.log("vvictor ", data)
-    const users: Promise<Users[]> = data.user.map((user) => {
+    const totalCount = Number(headers["x-total-count"])
+
+    const users: Users[] = data.user.map((user) => {
         return {
             id: user.id,
             name: user.name,
@@ -25,13 +30,15 @@ export const getUsers = async () => {
             }),
         };
     });
-    return users;
+    return {
+        users, totalCount
+    };
 }
 
-export function useUsers() {
+export function useUsers(page: number) {
     return useQuery(
-        "users",
-        getUsers,
+        ["users", page], () => getUsers(page)
+        ,
         {
             // o tempo que definiremos que o dado não irá mais mudar
             staleTime: 1000 * 5,

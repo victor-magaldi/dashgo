@@ -25,8 +25,8 @@ import { useUsers } from "../../services/hooks/useUsers";
 
 export default function UsersList() {
     const [page, setPage] = useState<number>(1);
-    const { data, isLoading, isFetching, error } = useUsers();
-    console.log(page, "page");
+    const { data, isLoading, isFetching, error } = useUsers(page);
+
     const isWideVersion = useBreakpointValue({ base: false, lg: true });
 
     return (
@@ -87,7 +87,7 @@ export default function UsersList() {
                                     </Tr>
                                 </Thead>
                                 <Tbody>
-                                    {data.map((user) => {
+                                    {data?.users?.map((user) => {
                                         return (
                                             <Tr key={user?.id}>
                                                 <Td>
@@ -135,7 +135,7 @@ export default function UsersList() {
                                 </Tbody>
                             </Table>
                             <Pagination
-                                totalCountRegisters={200}
+                                totalCountRegisters={data?.totalCount}
                                 currentPage={page}
                                 onPageChange={setPage}
                             />
