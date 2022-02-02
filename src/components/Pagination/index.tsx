@@ -55,7 +55,15 @@ export function Pagination({
                 {currentPage > 1 + SIBLINGCOUNTS && (
                     <>
                         <PaginationItem number={1} />
-                        {currentPage > 2 + SIBLINGCOUNTS && <Text>...</Text>}
+                        {currentPage > 2 + SIBLINGCOUNTS && (
+                            <Text
+                                color={"gray.300"}
+                                width="8"
+                                textAlign="center"
+                            >
+                                ...
+                            </Text>
+                        )}
                     </>
                 )}
 
@@ -74,7 +82,13 @@ export function Pagination({
                 {currentPage + SIBLINGCOUNTS < lastPage && (
                     <>
                         {currentPage + 1 + SIBLINGCOUNTS < lastPage && (
-                            <Text>...</Text>
+                            <Text
+                                color={"gray.300"}
+                                width="8"
+                                textAlign="center"
+                            >
+                                ...
+                            </Text>
                         )}
                         <PaginationItem number={lastPage} />
                     </>
