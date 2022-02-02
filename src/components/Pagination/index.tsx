@@ -1,4 +1,4 @@
-import { Box, Stack } from "@chakra-ui/react";
+import { Box, Stack, Text } from "@chakra-ui/react";
 import { PaginationItem } from "./PaginationItem";
 
 interface PaginationProps {
@@ -7,7 +7,7 @@ interface PaginationProps {
     currentPage?: number;
     onPageChange: (page: number) => void;
 }
-const SIBLINGCOUNT = 1;
+const SIBLINGCOUNTS = 1;
 
 function generatePageArray(from: number, to: number) {
     return [...new Array(to - from)]
@@ -27,13 +27,16 @@ export function Pagination({
 
     const previousPage =
         currentPage > 1
-            ? generatePageArray(currentPage - 1 - SIBLINGCOUNT, currentPage - 1)
+            ? generatePageArray(
+                  currentPage - 1 - SIBLINGCOUNTS,
+                  currentPage - 1
+              )
             : [];
     const nextPages =
         currentPage < lastPage
             ? generatePageArray(
                   currentPage,
-                  Math.min(currentPage + SIBLINGCOUNT, lastPage)
+                  Math.min(currentPage + SIBLINGCOUNTS, lastPage)
               )
             : [];
 
@@ -49,6 +52,13 @@ export function Pagination({
                 <strong>0</strong> - <strong>10</strong> de <strong>100</strong>
             </Box>
             <Stack direction="row" spacing="2">
+                {currentPage > 1 + SIBLINGCOUNTS && (
+                    <>
+                        <PaginationItem number={1} />
+                        {currentPage > 2 + SIBLINGCOUNTS && <Text>...</Text>}
+                    </>
+                )}
+
                 {previousPage.length > 0 &&
                     previousPage.map((page) => {
                         return <PaginationItem key={page} number={page} />;
@@ -60,6 +70,15 @@ export function Pagination({
                     nextPages.map((page) => {
                         return <PaginationItem key={page} number={page} />;
                     })}
+
+                {currentPage + SIBLINGCOUNTS < lastPage && (
+                    <>
+                        {currentPage + 1 + SIBLINGCOUNTS < lastPage && (
+                            <Text>...</Text>
+                        )}
+                        <PaginationItem number={lastPage} />
+                    </>
+                )}
             </Stack>
         </Stack>
     );
