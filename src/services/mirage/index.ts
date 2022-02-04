@@ -43,6 +43,7 @@ export function makeServer() {
 
                 return new Response(200, { "x-total-count": String(total) }, { user })
             });
+            this.get("/users/:id");
             this.post("/users");
 
             this.namespace = "";

@@ -41,7 +41,7 @@ export function useUsers(page: number) {
         ,
         {
             // o tempo que definiremos que o dado não irá mais mudar
-            staleTime: 1000 * 5,
+            staleTime: 1000 * 60 * 10,
         }
     );
 }
